@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kylepeng93.mapper.BlogMapper">
+    <select id="selectBlog" resultType="blog">
+        select
+        id,
+        title,
+        author,
+        insert_time,
+        update_time
+        from blog
+        <if test="id != null">
+            where id = #{id}
+        </if>
+    </select>
+    <insert id="insertBlog" parameterType="blog" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into blog
+        (title, author, insert_time, update_time)
+        values
+        (#{title}, #{author}, #{insertTime}, #{updateTime})
+    </insert>
+</mapper>
